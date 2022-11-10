@@ -22,7 +22,7 @@ class SeleniumBaseClass:
                 if headless == True:
                     self.options.headless = True
                     self.options.add_argument("--headless")
-                    # self.options.add_argument("--no-sandbox")
+                self.options.add_argument("--no-sandbox")
                     # self.options.add_argument("--disable-gpu")
                 self.options.add_argument("--start-maximized")
                 self.driver = uc.Chrome(options=self.options)
