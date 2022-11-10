@@ -4,6 +4,7 @@ import random
 import time
 from pathlib import Path
 
+import undetected_chromedriver as uc
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -11,12 +12,22 @@ from selenium.webdriver.common.keys import Keys
 
 class SeleniumBaseClass:
 
-
     def __init__(self, headless=False, browser: str = 'Chrome'):
         self.browser = browser.capitalize()
         os.environ['GH_TOKEN'] = "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"
 
         match self.browser:
+            case 'Chrome':
+                self.options = uc.ChromeOptions()
+                if headless == True:
+                    self.options.headless = True
+                    self.options.add_argument("--headless")
+                    # self.options.add_argument("--no-sandbox")
+                    # self.options.add_argument("--disable-gpu")
+                self.options.add_argument("--start-maximized")
+                self.driver = uc.Chrome(options=self.options)
+                # self.driver.maximize_window()
+
             case 'Edge':
                 from selenium.webdriver.edge.service import Service
                 from webdriver_manager.microsoft import EdgeChromiumDriverManager
@@ -40,17 +51,6 @@ class SeleniumBaseClass:
                 from webdriver_manager.core.utils import ChromeType
                 self.driver = webdriver.Chrome(
                     service=Service(ChromeDriverManager(chrome_type=ChromeType.BRAVE).install()))
-
-            case 'Chrome':
-                from selenium.webdriver.chrome.service import Service
-                from webdriver_manager.chrome import ChromeDriverManager
-                self.options = webdriver.ChromeOptions()
-                if headless == True:
-                    self.options.add_argument("--headless")
-                    self.options.add_argument("--no-sandbox")
-                    self.options.add_argument("--disable-gpu")
-                # self.options.add_argument("--start-maximized")
-                self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=self.options)
 
     # ____________ Navigation ____________
     def find_elements_by_class_name(self, value: str):
