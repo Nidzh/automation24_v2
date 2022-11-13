@@ -2,7 +2,7 @@ import datetime
 import time
 
 from aiogram import Bot, Dispatcher, executor, types
-from parser import run_parser, get_parsing_time
+from selenium_24.parser import run_parser, get_parsing_time
 
 ID = 694104488
 API_TOKEN = '5722453782:AAGwG4Wgfns_UCRzzJX5ztmx9O_l8yWu_nk'

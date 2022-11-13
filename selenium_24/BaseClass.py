@@ -3,13 +3,13 @@ import time
 from loguru import logger
 from selenium.webdriver.common.by import By
 
-from SeleniumBaseClass import SeleniumBaseClass
+from selenium_24.SeleniumBaseClass import SeleniumBaseClass
 
 
 class BaseClass(SeleniumBaseClass):
 
-    def __init__(self, headless, articles: list):
-        super().__init__(headless, browser='Chrome')
+    def __init__(self, articles: list):
+        super().__init__(browser='Chrome')
         self.URL = 'https://www.automation24.de/'
         self.articles = articles
         self.result_dict = {}
@@ -19,13 +19,11 @@ class BaseClass(SeleniumBaseClass):
         self.sleep(3)
         self.find_element_by_class_name('newdesign pull-right').click()
         self.sleep(5)
-        print(f'Начало цикла - {datetime.datetime.now()}')
         for article in self.articles:
             self.article_iteration(article)
-        print(f'Конец цикла - {datetime.datetime.now()}')
 
     def article_iteration(self, article):
-        self.driver.save_screenshot('a.png')
+        self.sleep()
         self.driver.find_element(By.CLASS_NAME, 'form-control').clear()
         self.driver.find_element(By.CLASS_NAME, 'form-control').send_keys(article)
         self.sleep(7)
