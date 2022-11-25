@@ -16,41 +16,40 @@ class SeleniumBaseClass:
         self.browser = browser.capitalize()
         os.environ['GH_TOKEN'] = "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"
 
-        match self.browser:
-            case 'Chrome':
-                self.options = uc.ChromeOptions()
-                if headless == True:
-                    self.options.headless = True
-                    self.options.add_argument("--headless")
-                    self.options.add_argument("--no-sandbox")
-                    # self.options.add_argument("--disable-gpu")
-                self.options.add_argument("--start-maximized")
-                self.driver = uc.Chrome(options=self.options)
-                # self.driver.maximize_window()
+        if self.browser == 'Chrome':
+            self.options = uc.ChromeOptions()
+            if headless == True:
+                self.options.headless = True
+                self.options.add_argument("--headless")
+                self.options.add_argument("--no-sandbox")
+                # self.options.add_argument("--disable-gpu")
+            self.options.add_argument("--start-maximized")
+            self.driver = uc.Chrome(options=self.options)
+            # self.driver.maximize_window()
 
-            case 'Edge':
-                from selenium.webdriver.edge.service import Service
-                from webdriver_manager.microsoft import EdgeChromiumDriverManager
-                self.driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
-
-            case 'Opera':
-                from webdriver_manager.opera import OperaDriverManager
-                self.options = webdriver.ChromeOptions()
-                self.options.add_argument('allow-elevated-browser')
-                self.options.binary_location = "/usr/bin/opera"
-                self.driver = webdriver.Opera(executable_path=OperaDriverManager().install(), options=self.options)
-
-            case 'Firefox':
-                from selenium.webdriver.firefox.service import Service
-                from webdriver_manager.firefox import GeckoDriverManager
-                self.driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
-
-            case 'Brave':
-                from selenium.webdriver.chrome.service import Service
-                from webdriver_manager.chrome import ChromeDriverManager
-                from webdriver_manager.core.utils import ChromeType
-                self.driver = webdriver.Chrome(
-                    service=Service(ChromeDriverManager(chrome_type=ChromeType.BRAVE).install()))
+            # case 'Edge':
+            #     from selenium.webdriver.edge.service import Service
+            #     from webdriver_manager.microsoft import EdgeChromiumDriverManager
+            #     self.driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
+            #
+            # case 'Opera':
+            #     from webdriver_manager.opera import OperaDriverManager
+            #     self.options = webdriver.ChromeOptions()
+            #     self.options.add_argument('allow-elevated-browser')
+            #     self.options.binary_location = "/usr/bin/opera"
+            #     self.driver = webdriver.Opera(executable_path=OperaDriverManager().install(), options=self.options)
+            #
+            # case 'Firefox':
+            #     from selenium.webdriver.firefox.service import Service
+            #     from webdriver_manager.firefox import GeckoDriverManager
+            #     self.driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
+            #
+            # case 'Brave':
+            #     from selenium.webdriver.chrome.service import Service
+            #     from webdriver_manager.chrome import ChromeDriverManager
+            #     from webdriver_manager.core.utils import ChromeType
+            #     self.driver = webdriver.Chrome(
+            #         service=Service(ChromeDriverManager(chrome_type=ChromeType.BRAVE).install()))
 
     # ____________ Navigation ____________
     def find_elements_by_class_name(self, value: str):
