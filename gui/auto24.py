@@ -1,12 +1,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from pathlib import Path
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(516, 304)
+        MainWindow.resize(400, 100)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../DE.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap('de.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -20,11 +20,12 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
 
-        self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar.setProperty("value", 50)
-        self.progressBar.setTextDirection(QtWidgets.QProgressBar.TopToBottom)
-        self.progressBar.setObjectName("progressBar")
-        self.verticalLayout.addWidget(self.progressBar)
+
+
+        self.pushButton2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton2.setObjectName("pushButton2")
+        self.verticalLayout.addWidget(self.pushButton2)
+        MainWindow.setCentralWidget(self.centralwidget)
 
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setObjectName("pushButton")
@@ -37,4 +38,5 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Automation24"))
-        self.pushButton.setText(_translate("MainWindow", "Запустить браузер"))
+        self.pushButton.setText(_translate("MainWindow", "Запустить парсинг"))
+        self.pushButton2.setText(_translate("MainWindow", "Определить время парсинга."))
